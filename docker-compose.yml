@@ -1,0 +1,18 @@
+services:
+  soporte:
+    image: php:8.2-apache
+    container_name: soporte
+    ports:
+      - "91:80"
+    volumes:
+      - .:/var/www/html
+    environment:
+      - MYSQL_HOST=${MYSQL_HOST}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+    command: >
+      sh -c "docker-php-ext-install mysqli pdo pdo_mysql &&
+             a2enmod rewrite &&
+             apache2-foreground"
+ 
